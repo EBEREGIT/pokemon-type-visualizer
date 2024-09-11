@@ -1,4 +1,4 @@
-import { BasicPokemonDetails } from "../assets/types";
+import { BasicPokemonDetails, SortedPokemon } from "../assets/types";
 
 // generate a unique color to match each pokemon type
 export const generateRandomColors = (num: number) => {
@@ -42,7 +42,7 @@ export const getPokemonTypesCount = (pokemons: BasicPokemonDetails[]) => {
 export const setupPokemonTypes = (
   pokemonMapEntries: Array<[string, number]>
 ) => {
-  const sortedPokemonArray = [];
+  const sortedPokemonArray: SortedPokemon[] = [];
 
   const colors = generateRandomColors(pokemonMapEntries.length);
 

@@ -40,11 +40,10 @@ export default function ThemeManagerProvider({ children }: ThemeManagerProviderP
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#3C6FBEDE",
-        light: "#3C6FBE40",
+        main: "#e8ecef",
       },
       secondary: {
-        main: "#8481FF3D",
+        main: "#0C0C0C",
       },
       mode: mode ? "dark" : "light",
     },
