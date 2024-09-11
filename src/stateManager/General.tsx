@@ -4,6 +4,7 @@ import React, { createContext, useContext } from "react";
 
 // internal imports
 import { Variable } from "./variable";
+import { BasicPokemonDetails } from "../assets/types";
 
 type GeneralType = {
   reset: () => void;
@@ -46,7 +47,7 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
 
     setSearchResult([]);
 
-    const results = items.filter((item) =>
+    const results: BasicPokemonDetails[] = items.filter((item) =>
       item[searchKey]
         .toLowerCase()
         .replace(/\s+/g, "")

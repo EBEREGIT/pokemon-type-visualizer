@@ -24,8 +24,8 @@ type VariableType = {
   setIsSuccessful: Dispatch<SetStateAction<boolean>>;
 
   // array
-  searchResult: unknown[];
-  setSearchResult: Dispatch<SetStateAction<unknown[]>>;
+  searchResult: BasicPokemonDetails[];
+  setSearchResult: Dispatch<SetStateAction<BasicPokemonDetails[]>>;
 
   // pokemon
   pokemon: BasicPokemonDetails | null;
@@ -51,7 +51,7 @@ export default function VariableProvider({ children }: VariableProviderProps) {
   const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
 
   // array
-  const [searchResult, setSearchResult] = useState<unknown[]>([]);
+  const [searchResult, setSearchResult] = useState<BasicPokemonDetails[]>([]);
 
   // pokemon
   const [pokemon, setPokemon] = useState<BasicPokemonDetails | null>(null);
