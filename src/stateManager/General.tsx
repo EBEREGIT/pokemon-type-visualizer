@@ -17,14 +17,22 @@ type GeneralProviderProps = {
 export const General = createContext({} as GeneralType);
 
 export default function GeneralProvider({ children }: GeneralProviderProps) {
-  const { setFeedback, setSearchResult, search, setSearch } =
-    useContext(Variable);
+  const {
+    setSearchResult,
+    search,
+    setSearch,
+    setIsLoading,
+    setIsError,
+    setIsSuccessful,
+  } = useContext(Variable);
 
   // reset
   const reset = () => {
     setTimeout(() => {
-      setFeedback("");
-    }, 500);
+      setIsLoading(false);
+      setIsError(false);
+      setIsSuccessful(false);
+    }, 1000);
   };
 
   // search Items

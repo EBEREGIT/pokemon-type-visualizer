@@ -15,7 +15,3 @@ export default function useGetSortedPokemonTypes() {
 
   return setupPokemonTypes(pokemonMapEntries);
 }
-
-
-
-

@@ -6,6 +6,7 @@ import React, { createContext, useContext } from "react";
 import { BaseUrl } from "../constants";
 import { BasicPokemon } from "../assets/types";
 import { Variable } from "./variable";
+import { General } from "./General";
 
 type PokemonType = {
   getPokemons: () => void;
@@ -18,9 +19,13 @@ type PokemonProviderProps = {
 export const Pokemon = createContext({} as PokemonType);
 
 export default function PokemonProvider({ children }: PokemonProviderProps) {
-  const { setPokemons } = useContext(Variable);
+  const { setPokemons, setIsLoading, setIsError, setIsSuccessful } =
+    useContext(Variable);
+  const { reset } = useContext(General);
 
   const getPokemons = async () => {
+    setIsLoading(true);
+
     try {
       // get all pokemons
       const response = await axios.get(`${BaseUrl}?limit=151`);
@@ -36,8 +41,13 @@ export default function PokemonProvider({ children }: PokemonProviderProps) {
       for (const pokemon of output) {
         setPokemons((previousState) => [...previousState, pokemon.data]);
       }
+
+      setIsSuccessful(true);
     } catch (error: unknown) {
+      setIsError(true);
       throw new Error(error as string);
+    } finally {
+      reset();
     }
   };
 

@@ -15,6 +15,14 @@ type VariableType = {
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
 
+  // boolean
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isError: boolean;
+  setIsError: Dispatch<SetStateAction<boolean>>;
+  isSuccessful: boolean;
+  setIsSuccessful: Dispatch<SetStateAction<boolean>>;
+
   // array
   searchResult: unknown[];
   setSearchResult: Dispatch<SetStateAction<unknown[]>>;
@@ -37,6 +45,11 @@ export default function VariableProvider({ children }: VariableProviderProps) {
   const [feedback, setFeedback] = useState<string>("");
   const [search, setSearch] = useState<string>("");
 
+  // boolean
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
+
   // array
   const [searchResult, setSearchResult] = useState<unknown[]>([]);
 
@@ -53,6 +66,12 @@ export default function VariableProvider({ children }: VariableProviderProps) {
         setSearch,
         feedback,
         setFeedback,
+        isLoading,
+        setIsLoading,
+        isError,
+        setIsError,
+        isSuccessful,
+        setIsSuccessful,
         pokemon,
         setPokemon,
         pokemons,
