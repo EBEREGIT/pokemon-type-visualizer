@@ -1,25 +1,21 @@
 import { useContext } from "react";
 import { Variable } from "../stateManager/variable";
+import { getPokemonTypesCount, setupPokemonTypes } from "../utils/helpers";
 
-export default function useGetPokemonTypes() {
+export default function useGetSortedPokemonTypes() {
   const { pokemons } = useContext(Variable);
 
-  const pokemonMap: Record<string, number> = {};
+  const pokemonMap: Record<string, number> = getPokemonTypesCount(pokemons);
 
-  // loop through the pokemons
-  for (const pokemon of pokemons) {
-    // loop through the types of each pokemon
-    for (const type of pokemon.types) {
-      const currentType = type.type.name;
+  // convert the pokemonMap to an array of array of keys and value pairs
+  // then sort them using the second key i.e the value(s)
+  const pokemonMapEntries: Array<[string, number]> = Object.entries(
+    pokemonMap
+  ).sort((a, b) => b[1] - a[1]);
 
-      // update the number of each pokemon type
-      if (Object.prototype.hasOwnProperty.call(pokemonMap, currentType)) {
-        pokemonMap[currentType]++;
-      } else {
-        pokemonMap[currentType] = 1;
-      }
-    }
-  }
-
-  return pokemonMap;
+  return setupPokemonTypes(pokemonMapEntries);
 }
+
+
+
+
