@@ -24,7 +24,6 @@ function App() {
         elevation={0}
         sx={{
           height: "100vh",
-          py: 3.5,
           backgroundColor: mode ? "" : theme.palette.primary.main,
         }}
       >
@@ -32,7 +31,10 @@ function App() {
           square
           elevation={0}
           sx={{
+          py: 3.5,
             height: "auto",
+            backgroundColor: mode ? "" : theme.palette.primary.main,
+
           }}
         >
           <Nav />
