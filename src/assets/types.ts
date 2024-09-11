@@ -1,4 +1,3 @@
-
 export type BasicPokemon = {
   name: string;
   url: string;
@@ -80,4 +79,5 @@ export type SortedPokemon = {
   name: string;
   count: number;
   color: string;
+  countPercentage: number;
 };

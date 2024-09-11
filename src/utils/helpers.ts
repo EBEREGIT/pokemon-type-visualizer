@@ -49,11 +49,13 @@ export const setupPokemonTypes = (
   const sortedPokemonArray: SortedPokemon[] = [];
 
   const colors = generateRandomColors(pokemonMapEntries.length);
+  const total = getTotal(pokemonMapEntries);
 
   for (const entry in pokemonMapEntries) {
     sortedPokemonArray.push({
       name: pokemonMapEntries[entry][0],
       count: pokemonMapEntries[entry][1],
+      countPercentage: getPercentage(pokemonMapEntries[entry][1], total),
       color: colors[entry],
     });
   }
@@ -109,6 +111,21 @@ export const capitalize = (text: string) => {
 
   for (const str of text.split(" ")) {
     result += " " + str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
+  return result;
+};
+
+export const getPercentage = (amount: number, total: number) => {
+  const result = (amount / total) * 100;
+  return parseFloat(result.toFixed(1));
+};
+
+export const getTotal = (arr: Array<[string, number]>) => {
+  let result: number = 0;
+
+  for (const num of arr) {
+    result = result + num[1];
   }
 
   return result;

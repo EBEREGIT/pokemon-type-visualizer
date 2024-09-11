@@ -39,7 +39,7 @@ export default function BarChartComponent(props: {
               <Legend />
 
               {/* display each bar cel with its unique color */}
-              <Bar dataKey="count">
+              <Bar dataKey="countPercentage">
                 {data.map((entry) => (
                   <Cell
                     cursor="pointer"
