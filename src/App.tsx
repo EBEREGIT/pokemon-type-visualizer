@@ -1,11 +1,10 @@
 // external import
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 // asset
 import "./App.css";
 
 // internal import
-import { Pokemon } from "./stateManager/Pokemon";
 import { ThemeManager } from "./stateManager/Theme";
 import { Paper, ThemeProvider } from "@mui/material";
 import Loader from "./components/Feedback/Loader";
@@ -15,12 +14,6 @@ import Home from "./pages/home";
 
 function App() {
   const { theme, mode } = useContext(ThemeManager);
-  const { getPokemons } = useContext(Pokemon);
-
-  useEffect(() => {
-    getPokemons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -35,8 +28,16 @@ function App() {
           backgroundColor: mode ? "" : theme.palette.primary.main,
         }}
       >
-        <Nav />
-        <Home />
+        <Paper
+          square
+          elevation={0}
+          sx={{
+            height: "auto",
+          }}
+        >
+          <Nav />
+          <Home />
+        </Paper>
       </Paper>
     </ThemeProvider>
   );
