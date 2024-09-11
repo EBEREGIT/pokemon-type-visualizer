@@ -11,9 +11,15 @@ import Loader from "./components/Feedback/Loader";
 import Toast from "./components/Feedback/toast";
 import Nav from "./components/nav";
 import Home from "./pages/home";
+import useGetPokemonSingleVsDualTypes from "./hooks/useGetPokemonSingleVsDualTypes";
 
 function App() {
   const { theme, mode } = useContext(ThemeManager);
+
+  const pokemonMap = useGetPokemonSingleVsDualTypes()
+
+  console.log(pokemonMap);
+  
 
   return (
     <ThemeProvider theme={theme}>

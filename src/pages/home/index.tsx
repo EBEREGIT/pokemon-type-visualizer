@@ -16,7 +16,7 @@ export default function Home() {
       const timeoutId = setTimeout(() => {
         getPokemons();
       }, 1000);
-      
+
       return () => clearTimeout(timeoutId);
     } else {
       getPokemons();
@@ -27,6 +27,7 @@ export default function Home() {
 
   return (
     <Box component={"main"} sx={{ mx: 2.5 }}>
+      {/* search results section */}
       {search ? (
         <>
           <SectionHeading label={"Search Result"} />
@@ -35,6 +36,8 @@ export default function Home() {
       ) : (
         ""
       )}
+
+      {/* charts section */}
       <SectionHeading label={"Report"} />
       <Reports />
     </Box>

@@ -56,3 +56,33 @@ export const setupPokemonTypes = (
 
   return sortedPokemonArray;
 };
+
+// convert the pokemonMap to an array of array of keys and value pairs
+// then sort them using the second key i.e the value(s)
+export const sortPokemonObject = (pokemonMap: Record<string, number>) => {
+  const pokemonMapEntries: Array<[string, number]> = Object.entries(
+    pokemonMap
+  ).sort((a, b) => b[1] - a[1]);
+
+  return pokemonMapEntries;
+};
+
+export const getPokemonSingleVsDualTypesCount = (
+  pokemons: BasicPokemonDetails[]
+) => {
+  const pokemonMap: Record<string, number> = {
+    dual: 0,
+    single: 0,
+  };
+
+  // loop through the pokemons
+  for (const pokemon of pokemons) {
+    if (pokemon.types.length > 1) {
+      pokemonMap["dual"]++;
+    } else {
+      pokemonMap["single"]++;
+    }
+  }
+
+  return pokemonMap;
+};
