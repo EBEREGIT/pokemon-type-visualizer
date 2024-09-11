@@ -7,7 +7,7 @@ export default function PokemonSingleVsDoubleTypes() {
   return (
     <BarChartComponent
       data={data}
-      label={"Pokémon Single-type vs dual-type Distribution Visualizer"}
+      label={"Pokémon Single-type vs Dual-type Distribution Visualizer"}
     />
   );
 }
