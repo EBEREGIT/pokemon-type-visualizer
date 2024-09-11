@@ -1,4 +1,8 @@
-import { BasicPokemonDetails, SortedPokemon } from "../assets/types";
+import {
+  BasicPokemonDetails,
+  SortedPokemon,
+  BasicPokemonType,
+} from "../assets/types";
 
 // generate a unique color to match each pokemon type
 export const generateRandomColors = (num: number) => {
@@ -85,4 +89,27 @@ export const getPokemonSingleVsDualTypesCount = (
   }
 
   return pokemonMap;
+};
+
+export const retrievePokemonTypes = (pokemonTypes: BasicPokemonType[]) => {
+  const result: string[] = [];
+
+  for (const pokemonType of pokemonTypes) {
+    result.push(pokemonType.type.name);
+  }
+
+  return result.join(", ");
+};
+
+// capitalize words and sentences
+export const capitalize = (text: string) => {
+  if (!text) return;
+
+  let result = "";
+
+  for (const str of text.split(" ")) {
+    result += " " + str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
+  return result;
 };

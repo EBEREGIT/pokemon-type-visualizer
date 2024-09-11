@@ -37,7 +37,7 @@ type stat = {
   stat: BasicPokemon;
 };
 
-type BasicPokemonType = {
+export type BasicPokemonType = {
   slot: 1;
   type: BasicPokemon;
 };
