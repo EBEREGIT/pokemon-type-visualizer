@@ -1,14 +1,22 @@
+// external import
 import { useContext, useEffect, useState } from "react";
+
+// asset
+import "./App.css";
+
+// internal import
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
 import { Variable } from "./stateManager/variable";
 import { Pokemon } from "./stateManager/Pokemon";
+import useGetPokemonTypes from "./hooks/useGetPokemonTypes";
 
 function App() {
   const [count, setCount] = useState(0);
   const { pokemons } = useContext(Variable);
   const { getPokemons } = useContext(Pokemon);
+
+  const pokemonType = useGetPokemonTypes();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -19,6 +27,7 @@ function App() {
   }, []);
 
   console.log(pokemons);
+  console.log(pokemonType);
 
   return (
     <>
