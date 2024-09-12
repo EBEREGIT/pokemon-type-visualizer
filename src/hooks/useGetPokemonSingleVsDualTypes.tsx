@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
 import {
   getPokemonSingleVsDualTypesCount,
@@ -15,5 +15,10 @@ export default function useGetPokemonSingleVsDualTypes() {
   const pokemonMapEntries: Array<[string, number]> =
     sortPokemonObject(pokemonMap);
 
-  return setupPokemonTypes(pokemonMapEntries);
+  const sortedPokemonSingleVsDualTypes = useMemo(
+    () => setupPokemonTypes(pokemonMapEntries),
+    [pokemonMapEntries]
+  );
+
+  return sortedPokemonSingleVsDualTypes;
 }

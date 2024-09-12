@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
 import {
   getPokemonTypesCount,
@@ -14,5 +14,10 @@ export default function useGetSortedPokemonTypes() {
   const pokemonMapEntries: Array<[string, number]> =
     sortPokemonObject(pokemonMap);
 
-  return setupPokemonTypes(pokemonMapEntries);
+  const sortedPokemonTypes = useMemo(
+    () => setupPokemonTypes(pokemonMapEntries),
+    [pokemonMapEntries]
+  );
+
+  return sortedPokemonTypes;
 }

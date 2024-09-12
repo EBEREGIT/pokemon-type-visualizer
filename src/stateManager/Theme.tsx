@@ -48,10 +48,10 @@ export default function ThemeManagerProvider({
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#2596be",
+        main: "#0d5e95",
       },
       secondary: {
-        main: "#0C0C0C",
+        main: "#00070e",
       },
       mode: mode ? "dark" : "light",
     },

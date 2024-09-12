@@ -13,6 +13,7 @@ import Heading from "../../heading";
 import Layout from "../../../../components/General/Layout";
 import { useContext } from "react";
 import { Variable } from "../../../../stateManager/variable";
+import { ThemeManager } from "../../../../stateManager/Theme";
 
 export default function BarChartComponent(props: {
   data: SortedPokemon[];
@@ -20,6 +21,7 @@ export default function BarChartComponent(props: {
 }) {
   const { data, label } = props;
   const { showPercentage } = useContext(Variable);
+  const { theme, mode } = useContext(ThemeManager);
 
   return (
     <Layout
@@ -47,6 +49,11 @@ export default function BarChartComponent(props: {
                   <Cell
                     cursor="pointer"
                     fill={entry.color}
+                    stroke={
+                      mode
+                        ? theme.palette.primary.dark
+                        : theme.palette.secondary.light
+                    }
                     key={`cell-${entry}`}
                   />
                 ))}
