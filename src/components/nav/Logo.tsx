@@ -14,6 +14,7 @@ export default function Logo() {
       <Typography
         variant="h5"
         fontWeight={900}
+        fontFamily={"Protest Guerrilla"}
         sx={{
           color: theme.palette.primary.main,
         }}
