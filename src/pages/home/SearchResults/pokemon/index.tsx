@@ -7,10 +7,13 @@ import {
   retrievePokemonAbilities,
   retrievePokemonTypes,
 } from "../../../../utils/helpers";
-import { Box } from "@mui/material";
+import { useContext } from "react";
+import { ThemeManager } from "../../../../stateManager/Theme";
+import Cry from "./Cry";
 
 export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
   const { pokemon } = props;
+  const { isLessThanMD } = useContext(ThemeManager);
 
   return (
     <Grid
@@ -20,8 +23,7 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
         width: "100%",
         height: "auto",
         borderRadius: 2,
-        px: 5,
-        py: 5,
+        px: isLessThanMD ? 0 : 5,
       }}
     >
       <Half content={<Item title={"Weight"} content={pokemon.weight} />} />
@@ -46,22 +48,7 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
         }
       />
 
-      <Half
-        content={
-          <Item
-            title={"Cry"}
-            content={
-              <Box component={"audio"} controls>
-                <Box
-                  component={"source"}
-                  src={pokemon.cries.latest}
-                  type="audio/ogg"
-                />
-              </Box>
-            }
-          />
-        }
-      />
+      <Cry pokemon={pokemon} />
     </Grid>
   );
 }

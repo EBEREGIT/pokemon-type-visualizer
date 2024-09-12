@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { ReactNode, useContext } from "react";
 import { ThemeManager } from "../../../../stateManager/Theme";
+import Heading from "./heading";
 
 export default function Item(props: { title: string; content: ReactNode }) {
   const { title, content } = props;
@@ -9,15 +10,7 @@ export default function Item(props: { title: string; content: ReactNode }) {
   return (
     <Box component={"aside"} sx={{ px: 1, py: 2 }}>
       {/* title */}
-      <Typography
-        variant="body2"
-        gutterBottom
-        fontWeight={500}
-        fontSize={14}
-        sx={{ color: mode ? theme.palette.primary.light : theme.palette.secondary.dark }}
-      >
-        {title}
-      </Typography>
+      <Heading title={title} />
 
       {/* content */}
       <Box
