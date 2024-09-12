@@ -11,12 +11,15 @@ import {
 import { SortedPokemon } from "../../../../assets/types";
 import Heading from "../../heading";
 import Layout from "../../../../components/General/Layout";
+import { useContext } from "react";
+import { Variable } from "../../../../stateManager/variable";
 
 export default function BarChartComponent(props: {
   data: SortedPokemon[];
   label: string;
 }) {
   const { data, label } = props;
+  const { showPercentage } = useContext(Variable);
 
   return (
     <Layout
@@ -31,7 +34,7 @@ export default function BarChartComponent(props: {
           />
 
           {/* chart body */}
-          <ResponsiveContainer width={"100%"} height={300}>
+          <ResponsiveContainer width={"100%"} height={400}>
             <BarChart data={data}>
               <XAxis dataKey="name" />
               <YAxis />
@@ -39,7 +42,7 @@ export default function BarChartComponent(props: {
               <Legend />
 
               {/* display each bar cel with its unique color */}
-              <Bar dataKey="countPercentage">
+              <Bar dataKey={showPercentage ? "percentage" : "count"}>
                 {data.map((entry) => (
                   <Cell
                     cursor="pointer"

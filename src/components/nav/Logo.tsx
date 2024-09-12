@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ThemeManager } from "../../stateManager/Theme";
 
 export default function Logo() {
-  const { theme, mode } = useContext(ThemeManager);
+  const { theme } = useContext(ThemeManager);
 
   return (
     <Box
@@ -15,9 +15,7 @@ export default function Logo() {
         variant="h5"
         fontWeight={900}
         sx={{
-          color: mode
-            ? theme.palette.primary.main
-            : theme.palette.secondary.main,
+          color: theme.palette.primary.main,
         }}
       >
         Pokemon Chart

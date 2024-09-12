@@ -11,15 +11,9 @@ import Loader from "./components/Feedback/Loader";
 import Toast from "./components/Feedback/toast";
 import Nav from "./components/nav";
 import Home from "./pages/home";
-import useGetPokemonSingleVsDualTypes from "./hooks/useGetPokemonSingleVsDualTypes";
 
 function App() {
   const { theme, mode } = useContext(ThemeManager);
-
-  const pokemonMap = useGetPokemonSingleVsDualTypes()
-
-  console.log(pokemonMap);
-  
 
   return (
     <ThemeProvider theme={theme}>
@@ -30,17 +24,16 @@ function App() {
         elevation={0}
         sx={{
           height: "100vh",
-          backgroundColor: mode ? "" : theme.palette.primary.main,
+          backgroundColor: mode ? "" : theme.gray.main,
         }}
       >
         <Paper
           square
           elevation={0}
           sx={{
-          py: 3.5,
+            py: 3.5,
             height: "auto",
-            backgroundColor: mode ? "" : theme.palette.primary.main,
-
+            backgroundColor: mode ? "" : theme.gray.main,
           }}
         >
           <Nav />

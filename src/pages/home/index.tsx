@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import Reports from "./Reports";
-import SectionHeading from "./sectionHeading";
 import SearchResult from "./SearchResults";
 import { Variable } from "../../stateManager/variable";
 import { useContext, useEffect } from "react";
 import { Pokemon } from "../../stateManager/Pokemon";
+import SectionHeading from "./sectionHeading";
 
 export default function Home() {
   const { search } = useContext(Variable);
@@ -38,7 +38,7 @@ export default function Home() {
       )}
 
       {/* charts section */}
-      <SectionHeading label={"Report"} />
+      <SectionHeading label={"Report"} showSwitch={true} />
       <Reports />
     </Box>
   );

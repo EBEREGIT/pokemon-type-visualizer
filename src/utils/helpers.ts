@@ -55,7 +55,7 @@ export const setupPokemonTypes = (
     sortedPokemonArray.push({
       name: pokemonMapEntries[entry][0],
       count: pokemonMapEntries[entry][1],
-      countPercentage: getPercentage(pokemonMapEntries[entry][1], total),
+      percentage: getPercentage(pokemonMapEntries[entry][1], total),
       color: colors[entry],
     });
   }

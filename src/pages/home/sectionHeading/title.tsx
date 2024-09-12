@@ -1,8 +1,8 @@
-import Heading from "./heading";
+import Heading from "../heading";
 
-export default function SectionHeading(props: { label: string }) {
+export default function Title(props: { label: string }) {
   const { label } = props;
-  
+
   return (
     <Heading
       label={label}

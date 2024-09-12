@@ -8,11 +8,17 @@ declare module "@mui/material/styles" {
     red: {
       error: string;
     };
+    gray: {
+      main: string;
+    };
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
     red: {
       error: string;
+    };
+    gray: {
+      main: string;
     };
   }
 }
@@ -33,14 +39,16 @@ type ThemeManagerProviderProps = {
 
 export const ThemeManager = createContext({} as ThemeManagerType);
 
-export default function ThemeManagerProvider({ children }: ThemeManagerProviderProps) {
+export default function ThemeManagerProvider({
+  children,
+}: ThemeManagerProviderProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState<string | boolean>(prefersDarkMode);
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#e8ecef",
+        main: "#2596be",
       },
       secondary: {
         main: "#0C0C0C",
@@ -49,6 +57,9 @@ export default function ThemeManagerProvider({ children }: ThemeManagerProviderP
     },
     red: {
       error: "#FF2E2E",
+    },
+    gray: {
+      main: "#e8ecef",
     },
   });
 

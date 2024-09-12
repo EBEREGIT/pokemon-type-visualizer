@@ -7,7 +7,7 @@ export default function PokemonTypes() {
   return (
     <BarChartComponent
       data={data}
-      label={"Pokémon Type Distribution Visualizer"}
+      label={"Type Distribution Visualizer"}
     />
   );
 }

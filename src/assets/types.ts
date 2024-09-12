@@ -79,5 +79,5 @@ export type SortedPokemon = {
   name: string;
   count: number;
   color: string;
-  countPercentage: number;
+  percentage: number;
 };

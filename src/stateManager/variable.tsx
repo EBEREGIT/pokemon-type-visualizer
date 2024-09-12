@@ -22,6 +22,8 @@ type VariableType = {
   setIsError: Dispatch<SetStateAction<boolean>>;
   isSuccessful: boolean;
   setIsSuccessful: Dispatch<SetStateAction<boolean>>;
+  showPercentage: boolean;
+  setShowPercentage: Dispatch<SetStateAction<boolean>>;
 
   // array
   searchResult: BasicPokemonDetails[];
@@ -49,6 +51,7 @@ export default function VariableProvider({ children }: VariableProviderProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
+  const [showPercentage, setShowPercentage] = useState(false);
 
   // array
   const [searchResult, setSearchResult] = useState<BasicPokemonDetails[]>([]);
@@ -72,6 +75,8 @@ export default function VariableProvider({ children }: VariableProviderProps) {
         setIsError,
         isSuccessful,
         setIsSuccessful,
+        showPercentage,
+        setShowPercentage,
         pokemon,
         setPokemon,
         pokemons,
