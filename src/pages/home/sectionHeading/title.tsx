@@ -8,7 +8,6 @@ export default function Title(props: { label: string }) {
       label={label}
       typographyStyles={{ fontWeight: 600 }}
       variant="h6"
-      styles={{ mt: 5, mb: 2.5 }}
     />
   );
 }

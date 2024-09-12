@@ -11,7 +11,13 @@ export default function SectionHeading(props: {
   return (
     <Box
       component={"section"}
-      sx={{ display: "flex", justifyContent: "space-between" }}
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        mt: 5, mb: 2.5
+      }}
     >
       <Title label={label} />
 

@@ -24,8 +24,8 @@ declare module "@mui/material/styles" {
 }
 
 type ThemeManagerType = {
-  mode: string | boolean;
-  setMode: React.Dispatch<React.SetStateAction<string | boolean>>;
+  mode: boolean;
+  setMode: React.Dispatch<React.SetStateAction<boolean>>;
   theme: Theme;
   isGreaterThanMD: boolean;
   isGreaterThanSM: boolean;
@@ -43,7 +43,7 @@ export default function ThemeManagerProvider({
   children,
 }: ThemeManagerProviderProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [mode, setMode] = useState<string | boolean>(prefersDarkMode);
+  const [mode, setMode] = useState<boolean>(prefersDarkMode);
 
   const theme = createTheme({
     palette: {

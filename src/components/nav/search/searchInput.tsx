@@ -1,10 +1,12 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { useContext } from "react";
 import { SearchTwoTone } from "@mui/icons-material";
-import { Variable } from "../../stateManager/variable";
+import { Variable } from "../../../stateManager/variable";
+import { ThemeManager } from "../../../stateManager/Theme";
 
-export default function SearchComponent() {
+export default function SearchInput() {
   const { search, setSearch } = useContext(Variable);
+  const { isLessThanMD } = useContext(ThemeManager);
 
   return (
     <TextField
@@ -17,7 +19,7 @@ export default function SearchComponent() {
       placeholder={"Enter Search Term"}
       onChange={(e) => setSearch(e.target.value)}
       sx={{
-        width: 500,
+        width: isLessThanMD ? "100%" : 500,
       }}
       slotProps={{
         input: {

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ThemeManager } from "../../stateManager/Theme";
 
 export default function Logo() {
-  const { theme } = useContext(ThemeManager);
+  const { theme, isLessThanMD } = useContext(ThemeManager);
 
   return (
     <Box
@@ -18,7 +18,7 @@ export default function Logo() {
           color: theme.palette.primary.main,
         }}
       >
-        Pokemon Chart
+        {isLessThanMD ? <>PC</> : <>Pokemon Chart</>}
       </Typography>
     </Box>
   );

@@ -13,7 +13,7 @@ import Nav from "./components/nav";
 import Home from "./pages/home";
 
 function App() {
-  const { theme, mode } = useContext(ThemeManager);
+  const { theme, mode, isLessThanMD } = useContext(ThemeManager);
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,7 +31,8 @@ function App() {
           square
           elevation={0}
           sx={{
-            py: 3.5,
+            pt: isLessThanMD ? 0 : 3.5,
+            pb: 5,
             height: "auto",
             backgroundColor: mode ? "" : theme.gray.main,
           }}

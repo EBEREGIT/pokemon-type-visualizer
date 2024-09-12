@@ -5,10 +5,12 @@ import { Variable } from "../../stateManager/variable";
 import { useContext, useEffect } from "react";
 import { Pokemon } from "../../stateManager/Pokemon";
 import SectionHeading from "./sectionHeading";
+import { ThemeManager } from "../../stateManager/Theme";
 
 export default function Home() {
   const { search } = useContext(Variable);
   const { getPokemons } = useContext(Pokemon);
+  const { isLessThanMD } = useContext(ThemeManager);
 
   useEffect(() => {
     // this runs only on development to avoid duplicate data
@@ -26,7 +28,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Box component={"main"} sx={{ mx: 2.5 }}>
+    <Box component={"main"} sx={{ mx: isLessThanMD ? 1 : 2.5 }}>
       {/* search results section */}
       {search ? (
         <>

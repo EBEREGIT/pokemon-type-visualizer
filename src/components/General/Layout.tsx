@@ -4,7 +4,7 @@ import { ThemeManager } from "../../stateManager/Theme";
 
 export default function Layout(props: { content: ReactNode; styles?: object }) {
   const { content, styles } = props;
-  const { theme, mode } = useContext(ThemeManager);
+  const { theme, mode, isLessThanMD } = useContext(ThemeManager);
 
   return (
     <Paper
@@ -13,8 +13,8 @@ export default function Layout(props: { content: ReactNode; styles?: object }) {
       sx={{
         width: "95%",
         m: "auto",
-        p: 2,
-        borderRadius: 3,
+        p: isLessThanMD ? 1 : 2,
+        borderRadius: isLessThanMD ? 0 : 3,
         border: `1px solid ${
           mode ? theme.palette.primary.dark : theme.palette.secondary.light
         }`,

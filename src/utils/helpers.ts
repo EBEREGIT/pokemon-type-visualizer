@@ -74,6 +74,7 @@ export const sortPokemonObject = (pokemonMap: Record<string, number>) => {
   return pokemonMapEntries;
 };
 
+// count count for single and dual typed pokemons
 export const getPokemonSingleVsDualTypesCount = (
   pokemons: BasicPokemonDetails[]
 ) => {
@@ -94,6 +95,7 @@ export const getPokemonSingleVsDualTypesCount = (
   return pokemonMap;
 };
 
+// get the Pokemon Types of a pokemon
 export const retrievePokemonTypes = (pokemonTypes: BasicPokemonType[]) => {
   const result: string[] = [];
 
@@ -104,6 +106,7 @@ export const retrievePokemonTypes = (pokemonTypes: BasicPokemonType[]) => {
   return result.join(", ");
 };
 
+// get the Pokemon Abilities of a pokemon
 export const retrievePokemonAbilities = (pokemonAbilities: Ability[]) => {
   const result: string[] = [];
 
@@ -127,11 +130,13 @@ export const capitalize = (text: string) => {
   return result;
 };
 
+// calculate percentage of each type or group of types
 export const getPercentage = (amount: number, total: number) => {
   const result = (amount / total) * 100;
   return parseFloat(result.toFixed(1));
 };
 
+// calculate percentage of each type or group of types
 export const getTotal = (arr: Array<[string, number]>) => {
   let result: number = 0;
 
@@ -140,4 +145,16 @@ export const getTotal = (arr: Array<[string, number]>) => {
   }
 
   return result;
+};
+
+// toggle a state between true and false
+export const toggleState = (
+  value: boolean,
+  setter: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (value) {
+    setter(false);
+  } else {
+    setter(true);
+  }
 };
