@@ -11,6 +11,7 @@ import Loader from "./components/Feedback/Loader";
 import Toast from "./components/Feedback/toast";
 import Nav from "./components/nav";
 import Home from "./pages/home";
+import Footer from "./components/Footer";
 
 function App() {
   const { theme, mode, isLessThanMD } = useContext(ThemeManager);
@@ -32,13 +33,14 @@ function App() {
           elevation={0}
           sx={{
             pt: isLessThanMD ? 0 : 3.5,
-            pb: 5,
+            pb: isLessThanMD ? 0 : 5,
             height: "auto",
             backgroundColor: mode ? "" : theme.gray.main,
           }}
         >
           <Nav />
           <Home />
+          <Footer />
         </Paper>
       </Paper>
     </ThemeProvider>
