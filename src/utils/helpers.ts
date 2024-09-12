@@ -2,6 +2,7 @@ import {
   BasicPokemonDetails,
   SortedPokemon,
   BasicPokemonType,
+  Ability,
 } from "../assets/types";
 
 // generate a unique color to match each pokemon type
@@ -98,6 +99,16 @@ export const retrievePokemonTypes = (pokemonTypes: BasicPokemonType[]) => {
 
   for (const pokemonType of pokemonTypes) {
     result.push(pokemonType.type.name);
+  }
+
+  return result.join(", ");
+};
+
+export const retrievePokemonAbilities = (pokemonAbilities: Ability[]) => {
+  const result: string[] = [];
+
+  for (const pokemonAbility of pokemonAbilities) {
+    result.push(pokemonAbility.ability.name);
   }
 
   return result.join(", ");

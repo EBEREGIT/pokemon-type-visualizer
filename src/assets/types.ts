@@ -3,7 +3,7 @@ export type BasicPokemon = {
   url: string;
 };
 
-type Ability = {
+export type Ability = {
   ability: BasicPokemon;
   is_hidden: false;
   slot: 1;
@@ -55,7 +55,7 @@ type Move = {
 export type BasicPokemonDetails = {
   abilities: Ability[];
   base_experience: number;
-  cries: Cry[];
+  cries: Cry;
   forms: BasicPokemon[];
   game_indices: Game[];
   height: number;

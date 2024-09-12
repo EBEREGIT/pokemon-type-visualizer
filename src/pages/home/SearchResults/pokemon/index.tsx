@@ -2,7 +2,12 @@ import Grid from "@mui/material/Grid2";
 import Half from "../../../../components/Grid/Half";
 import Item from "./item";
 import { BasicPokemonDetails } from "../../../../assets/types";
-import { capitalize, retrievePokemonTypes } from "../../../../utils/helpers";
+import {
+  capitalize,
+  retrievePokemonAbilities,
+  retrievePokemonTypes,
+} from "../../../../utils/helpers";
+import { Box } from "@mui/material";
 
 export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
   const { pokemon } = props;
@@ -19,10 +24,6 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
         py: 5,
       }}
     >
-      <Half
-        content={<Item title={"Name"} content={capitalize(pokemon.name)} />}
-      />
-
       <Half content={<Item title={"Weight"} content={pokemon.weight} />} />
 
       <Half content={<Item title={"Height"} content={pokemon.height} />} />
@@ -32,6 +33,32 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
           <Item
             title={"Type(s)"}
             content={capitalize(retrievePokemonTypes(pokemon.types))}
+          />
+        }
+      />
+
+      <Half
+        content={
+          <Item
+            title={"Abilities"}
+            content={capitalize(retrievePokemonAbilities(pokemon.abilities))}
+          />
+        }
+      />
+
+      <Half
+        content={
+          <Item
+            title={"Cry"}
+            content={
+              <Box component={"audio"} controls>
+                <Box
+                  component={"source"}
+                  src={pokemon.cries.latest}
+                  type="audio/ogg"
+                />
+              </Box>
+            }
           />
         }
       />
