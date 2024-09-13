@@ -2,9 +2,7 @@ import { Box } from "@mui/material";
 import { BasicPokemonDetails } from "../../../../assets/types";
 import Heading from "./heading";
 
-export default function Cry(props: { pokemon: BasicPokemonDetails }) {
-  const { pokemon } = props;
-
+export default function Cry({ pokemon }: { pokemon: BasicPokemonDetails }) {
   return (
     <Box component={"section"} sx={{ my: 2 }}>
       {/* title */}

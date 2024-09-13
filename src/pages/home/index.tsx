@@ -29,15 +29,12 @@ export default function Home() {
 
   return (
     <Box component={"main"} sx={{ mx: isLessThanMD ? 1 : 2.5 }}>
-
       {/* search results section */}
-      {search ? (
+      {search && (
         <>
           <SectionHeading label={"Search Result"} />
           <SearchResult />
         </>
-      ) : (
-        ""
       )}
 
       {/* charts section */}

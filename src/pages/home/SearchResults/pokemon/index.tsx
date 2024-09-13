@@ -11,8 +11,7 @@ import { useContext } from "react";
 import { ThemeManager } from "../../../../stateManager/Theme";
 import Cry from "./Cry";
 
-export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
-  const { pokemon } = props;
+export default function Pokemon({ pokemon }: { pokemon: BasicPokemonDetails }) {
   const { isLessThanMD } = useContext(ThemeManager);
 
   return (
@@ -27,9 +26,7 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
       }}
     >
       <Half content={<Item title={"Weight"} content={pokemon.weight} />} />
-
       <Half content={<Item title={"Height"} content={pokemon.height} />} />
-
       <Half
         content={
           <Item
@@ -38,7 +35,6 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
           />
         }
       />
-
       <Half
         content={
           <Item
@@ -47,7 +43,6 @@ export default function Pokemon(props: { pokemon: BasicPokemonDetails }) {
           />
         }
       />
-
       <Cry pokemon={pokemon} />
     </Grid>
   );

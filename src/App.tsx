@@ -20,6 +20,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Loader />
       <Toast />
+
+      {/* Background with a fixed height to take up the view port  */}
       <Paper
         square
         elevation={0}
@@ -28,6 +30,7 @@ function App() {
           backgroundColor: mode ? "" : theme.gray.main,
         }}
       >
+        {/* Internal Background with a dynamic height to align with content*/}
         <Paper
           square
           elevation={0}

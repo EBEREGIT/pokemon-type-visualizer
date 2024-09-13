@@ -1,13 +1,19 @@
 import { Box, Typography } from "@mui/material";
 
-export default function Heading(props: {
+type HeadingProps = {
   label: string;
   typographyStyles?: object;
   styles?: object;
   variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body1" | "body2";
-}) {
-  const { label, typographyStyles, styles, variant } = props;
+};
 
+export default function Heading({
+  label,
+  typographyStyles,
+  styles,
+  variant,
+}: HeadingProps) {
+  
   return (
     <Box component={"section"} sx={{ ...styles }}>
       <Typography

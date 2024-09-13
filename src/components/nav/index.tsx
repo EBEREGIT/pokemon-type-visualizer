@@ -26,6 +26,7 @@ export default function Nav() {
           >
             <Logo />
 
+            {/* show search icon in small screens and search component on larger screens */}
             {isLessThanMD ? <SearchButton /> : <SearchInput />}
 
             <ModeToggle />

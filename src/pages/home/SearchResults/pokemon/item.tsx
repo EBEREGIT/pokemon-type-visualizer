@@ -3,8 +3,13 @@ import { ReactNode, useContext } from "react";
 import { ThemeManager } from "../../../../stateManager/Theme";
 import Heading from "./heading";
 
-export default function Item(props: { title: string; content: ReactNode }) {
-  const { title, content } = props;
+export default function Item({
+  title,
+  content,
+}: {
+  title: string;
+  content: ReactNode;
+}) {
   const { theme, mode } = useContext(ThemeManager);
 
   return (

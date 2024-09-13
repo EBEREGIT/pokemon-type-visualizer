@@ -2,8 +2,9 @@ import { Paper } from "@mui/material";
 import { ReactNode, useContext } from "react";
 import { ThemeManager } from "../../stateManager/Theme";
 
-export default function Layout(props: { content: ReactNode; styles?: object }) {
-  const { content, styles } = props;
+type LayoutProps = { content: ReactNode; styles?: object };
+
+export default function Layout({ content, styles }: LayoutProps) {
   const { theme, mode, isLessThanMD } = useContext(ThemeManager);
 
   return (

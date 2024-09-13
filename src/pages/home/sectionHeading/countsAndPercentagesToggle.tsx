@@ -1,20 +1,21 @@
-import { Stack, Switch, Typography } from "@mui/material";
+import { Stack, Switch } from "@mui/material";
 import { useContext } from "react";
 import { Variable } from "../../../stateManager/variable";
-import { ThemeManager } from "../../../stateManager/Theme";
+import LabelComponent from "./label";
 
 export default function CountsAndPercentagesToggle() {
   const { setShowPercentage, showPercentage } = useContext(Variable);
-  const { isLessThanMD } = useContext(ThemeManager);
 
   return (
     <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-      {isLessThanMD ? "" : <Typography>Count</Typography>}
+      <LabelComponent label={"Count"} />
+
       <Switch
         checked={showPercentage}
         onChange={(e) => setShowPercentage(e.target.checked)}
       />
-      {isLessThanMD ? "" : <Typography>Percentage</Typography>}
+
+      <LabelComponent label={"Percentage"} />
     </Stack>
   );
 }

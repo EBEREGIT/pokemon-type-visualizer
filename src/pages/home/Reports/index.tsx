@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import PokemonTypes from "./PokemonTypes";
-import PokemonSingleVsDoubleTypes from "./SingleVsDoubleTypes";
+import PokemonSingleVsDualTypes from "./SingleVsDoubleTypes";
 
 export default function Reports() {
   return (
@@ -9,7 +9,7 @@ export default function Reports() {
         <PokemonTypes />
       </Grid>
       <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
-        <PokemonSingleVsDoubleTypes />
+        <PokemonSingleVsDualTypes />
       </Grid>
     </Grid>
   );

@@ -2,8 +2,7 @@ import { Typography } from "@mui/material";
 import { useContext } from "react";
 import { ThemeManager } from "../../../../stateManager/Theme";
 
-export default function Heading(props: { title: string }) {
-  const { title } = props;
+export default function Heading({ title }: { title: string }) {
   const { theme, mode } = useContext(ThemeManager);
 
   return (

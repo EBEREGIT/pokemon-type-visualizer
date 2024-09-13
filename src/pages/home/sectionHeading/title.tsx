@@ -1,7 +1,6 @@
 import Heading from "../heading";
 
-export default function Title(props: { label: string }) {
-  const { label } = props;
+export default function Title({ label }: { label: string }) {
 
   return (
     <Heading

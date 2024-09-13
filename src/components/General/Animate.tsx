@@ -1,8 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 
-export default function Animate(props: { content: ReactNode }) {
-  const { content } = props;
+export default function Animate({ content }: { content: ReactNode }) {
 
   return (
     <AnimatePresence mode="wait">
