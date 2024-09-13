@@ -14,7 +14,7 @@ import Layout from "../../../../components/General/Layout";
 import { useContext } from "react";
 import { Variable } from "../../../../stateManager/variable";
 import { ThemeManager } from "../../../../stateManager/Theme";
-import { motion, AnimatePresence } from "framer-motion";
+import Animate from "../../../../components/General/Animate";
 
 export default function BarChartComponent(props: {
   data: SortedPokemon[];
@@ -25,14 +25,8 @@ export default function BarChartComponent(props: {
   const { theme, mode } = useContext(ThemeManager);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={label}
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -10, opacity: 0 }}
-        transition={{ duration: 0.2 }}
-      >
+    <Animate
+      content={
         <Layout
           content={
             <>
@@ -72,7 +66,7 @@ export default function BarChartComponent(props: {
             </>
           }
         />
-      </motion.div>
-    </AnimatePresence>
+      }
+    />
   );
 }

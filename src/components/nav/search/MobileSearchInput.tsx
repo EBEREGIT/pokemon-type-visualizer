@@ -3,6 +3,7 @@ import { ThemeManager } from "../../../stateManager/Theme";
 import { Variable } from "../../../stateManager/variable";
 import SearchInput from "./searchInput";
 import { Box } from "@mui/material";
+import Animate from "../../General/Animate";
 
 export default function MobileSearchInput() {
   const { isLessThanMD } = useContext(ThemeManager);
@@ -11,9 +12,13 @@ export default function MobileSearchInput() {
   return (
     <>
       {isLessThanMD && show ? (
-        <Box component={"section"} sx={{ mt: 2 }}>
-          <SearchInput />
-        </Box>
+        <Animate
+          content={
+            <Box component={"section"} sx={{ mt: 2 }}>
+              <SearchInput />
+            </Box>
+          }
+        />
       ) : (
         ""
       )}

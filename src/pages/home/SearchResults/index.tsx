@@ -3,6 +3,7 @@ import { Variable } from "../../../stateManager/variable";
 import { General } from "../../../stateManager/General";
 import Layout from "../../../components/General/Layout";
 import Pokemons from "./Pokemons";
+import Animate from "../../../components/General/Animate";
 
 export default function SearchResult() {
   const { search } = useContext(Variable);
@@ -13,5 +14,5 @@ export default function SearchResult() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  return <Layout content={<Pokemons />} />;
+  return <Animate content={<Layout content={<Pokemons />} />} />;
 }
