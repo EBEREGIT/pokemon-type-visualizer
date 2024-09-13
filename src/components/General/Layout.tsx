@@ -15,9 +15,9 @@ export default function Layout(props: { content: ReactNode; styles?: object }) {
         m: "auto",
         p: isLessThanMD ? 1 : 2,
         borderRadius: isLessThanMD ? 0 : 3,
-        border: `1px solid ${
-          mode ? theme.palette.primary.dark : theme.palette.secondary.light
-        }`,
+        // border: `1px solid ${
+        //   mode ? theme.palette.primary.dark : theme.palette.secondary.light
+        // }`,
         backgroundColor: mode ? theme.palette.secondary.main : "white",
         ...styles,
       }}

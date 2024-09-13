@@ -55,6 +55,12 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
     );
 
     setSearchResult(results);
+
+    // scroll to top to see search results
+    window.scrollTo({
+      top: 10,
+      behavior: "smooth",
+    });
   };
 
   return (

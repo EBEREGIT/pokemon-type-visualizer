@@ -13,8 +13,8 @@ export default function Home() {
   const { isLessThanMD } = useContext(ThemeManager);
 
   useEffect(() => {
-    // this runs only on development to avoid duplicate data
     if (location.hostname === "localhost") {
+      // this runs only on development to avoid duplicate data
       const timeoutId = setTimeout(() => {
         getPokemons();
       }, 1000);
@@ -29,6 +29,7 @@ export default function Home() {
 
   return (
     <Box component={"main"} sx={{ mx: isLessThanMD ? 1 : 2.5 }}>
+
       {/* search results section */}
       {search ? (
         <>

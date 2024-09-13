@@ -5,20 +5,25 @@ import {
   setupPokemonTypes,
   sortPokemonObject,
 } from "../utils/helpers";
+import { SortedPokemon } from "../assets/types";
 
-export default function useGetPokemonSingleVsDualTypes() {
+const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
   const { pokemons } = useContext(Variable);
 
-  const pokemonMap: Record<string, number> =
-    getPokemonSingleVsDualTypesCount(pokemons);
-
-  const pokemonMapEntries: Array<[string, number]> =
-    sortPokemonObject(pokemonMap);
-
-  const sortedPokemonSingleVsDualTypes = useMemo(
-    () => setupPokemonTypes(pokemonMapEntries),
-    [pokemonMapEntries]
+  // Memoize pokemonMap based on pokemons to avoid unnecessary recalculations
+  const pokemonMap: Record<string, number> = useMemo(
+    () => getPokemonSingleVsDualTypesCount(pokemons),
+    [pokemons]
   );
 
+  // Memoize the sorted Pokémon types
+  const sortedPokemonSingleVsDualTypes: SortedPokemon[] = useMemo(() => {
+    const pokemonMapEntries: Array<[string, number]> =
+      sortPokemonObject(pokemonMap);
+    return setupPokemonTypes(pokemonMapEntries);
+  }, [pokemonMap]);
+
   return sortedPokemonSingleVsDualTypes;
-}
+};
+
+export default useGetPokemonSingleVsDualTypes;
