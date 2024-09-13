@@ -4,11 +4,10 @@ import React, { createContext, useContext } from "react";
 
 // internal imports
 import { Variable } from "./variable";
-import { BasicPokemonDetails } from "../assets/types";
 
 type GeneralType = {
   reset: () => void;
-  searchItems: (items: any[], searchKey: string) => void;
+  searchItems: () => void;
 };
 
 type GeneralProviderProps = {
@@ -25,6 +24,7 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
     setIsLoading,
     setIsError,
     setIsSuccessful,
+    pokemons,
   } = useContext(Variable);
 
   // reset
@@ -37,18 +37,18 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
   };
 
   // search Items
-  const searchItems = (items: any[], searchKey: string) => {
+  const searchItems = () => {
     if (!search) return setSearchResult([]);
 
-    if (!items?.length) {
+    if (!pokemons?.length) {
       setSearch("");
       return alert("No items to search");
     }
 
     setSearchResult([]);
 
-    const results: BasicPokemonDetails[] = items.filter((item) =>
-      item[searchKey]
+    const results = pokemons.filter((pokemon) =>
+      pokemon.name
         .toLowerCase()
         .replace(/\s+/g, "")
         .includes(search.toLowerCase().replace(/\s+/g, ""))

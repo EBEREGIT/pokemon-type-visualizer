@@ -5,11 +5,11 @@ import Layout from "../../../components/General/Layout";
 import Pokemons from "./Pokemons";
 
 export default function SearchResult() {
-  const { pokemons, search } = useContext(Variable);
+  const { search } = useContext(Variable);
   const { searchItems } = useContext(General);
 
   useEffect(() => {
-    searchItems(pokemons, "name");
+    searchItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
