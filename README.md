@@ -184,7 +184,7 @@ I used the PokéAPI to fetch the first 151 Pokémon. Since each Pokémon’s typ
 The Pokémon data was transformed to count how many Pokémon belonged to each type. If a Pokémon had multiple types, I incremented the count for each type. This logic was put in a hook to keep the code modular. The hook also called other utility functions defined in the `helpers.ts` file to help separate concerns.
 
 ```javascript
-// ./src/hooks/useGetPokemonTypes.tsx
+// ./src/hooks/useGetSortedPokemonTypes.tsx
 import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
 import {
@@ -220,71 +220,43 @@ export default useGetSortedPokemonTypes;
 I used **Recharts** to create the bar chart. The chart data was sorted in descending order of Pokémon count. The chart also supports a toggle to switch between displaying raw counts and percentages. It was designed for reusability.
 
 ```javascript
-// ./src/pages/home/Reports/chart/BarChart.tsx
-import {
-  Bar,
-  BarChart,
-  Cell,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { SortedPokemon } from "../../../../assets/types";
-import Heading from "../../heading";
-import Layout from "../../../../components/General/Layout";
-import { useContext } from "react";
-import { Variable } from "../../../../stateManager/variable";
-import { ThemeManager } from "../../../../stateManager/Theme";
+// ./src/pages/home/Reports/chart/BarChart/index.tsx
 
-export default function BarChartComponent(props: {
-  data: SortedPokemon[],
-  label: string,
-}) {
-  const { data, label } = props;
-  const { showPercentage } = useContext(Variable);
-  const { theme, mode } = useContext(ThemeManager);
+import { SortedPokemon } from "../../../../../assets/types";
+import Layout from "../../../../../components/General/Layout";
+import Animate from "../../../../../components/General/Animate";
+import Title from "./title";
+import Visualizer from "./visualizer";
 
+type BarChartComponentProps = {
+  data: SortedPokemon[];
+  label: string;
+};
+
+export default function BarChartComponent({
+  data,
+  label,
+}: BarChartComponentProps) {
   return (
-    <Layout
+    <Animate
       content={
-        <>
-          <Heading
-            label={label}
-            typographyStyles={{ fontWeight: 500 }}
-            variant="body1"
-            styles={{ mb: 2 }}
-          />
+        <Layout
+          content={
+            <>
+              {/* chart title */}
+              <Title label={label} />
 
-          <ResponsiveContainer width={"100%"} height={400}>
-            <BarChart data={data}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-
-              <Bar dataKey={showPercentage ? "percentage" : "count"}>
-                {data.map((entry) => (
-                  <Cell
-                    cursor="pointer"
-                    fill={entry.color}
-                    stroke={
-                      mode
-                        ? theme.palette.primary.dark
-                        : theme.palette.secondary.light
-                    }
-                    key={`cell-${entry}`}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </>
+              {/* chart body */}
+              <Visualizer data={data} />
+            </>
+          }
+        />
       }
     />
   );
 }
+
+
 ```
 
 ### Styling
