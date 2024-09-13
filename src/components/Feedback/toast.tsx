@@ -12,33 +12,33 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Toast() {
-  const { isLoading, isSuccessful, isError } = React.useContext(Variable);
+  const { isLoading, isSuccessful, isError, feedback } = React.useContext(Variable);
+
+  // Determine the severity and message for the alert
+  const severity = isSuccessful
+    ? "success"
+    : isError
+    ? "error"
+    : isLoading
+    ? "warning"
+    : "info";
+
+  const message = isLoading
+    ? "Working... Please Wait 🙏🏾"
+    : isSuccessful
+    ? "Successful 😊"
+    : isError
+    ? feedback
+    : "";
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       <Snackbar
-        open={isLoading || isSuccessful || isError ? true : false}
+        open={Boolean(isLoading || isSuccessful || isError || feedback)}
         autoHideDuration={5000}
       >
-        <Alert
-          severity={
-            isSuccessful
-              ? "success"
-              : isError
-              ? "error"
-              : isLoading
-              ? "warning"
-              : "info"
-          }
-          sx={{ width: "100%" }}
-        >
-          {isLoading
-            ? "Working... Please Wait 🙏🏾"
-            : isSuccessful
-            ? "Successful 😊"
-            : isError
-            ? "Error Processing Request 😭"
-            : ""}
+        <Alert severity={severity} sx={{ width: "100%" }}>
+          {message}
         </Alert>
       </Snackbar>
     </Stack>
