@@ -64,7 +64,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```javascript
-   git clone https://github.com/EBEREGIT/pokemon-type-chart
+   git clone https://github.com/EBEREGIT/pokemon-type-visualizer
 
    cd pokemon-type-chart
    ```
