@@ -104,10 +104,17 @@ npm run build
 ```javascript
 
 ├── src
-│   ├── constants
-│   │   └── index.ts
 │   ├── assets
 │   │   └── types.ts
+│   ├── components
+│   │   ├── Buttons
+│   │   ├── Feedback
+│   │   ├── Footer
+│   │   ├── General
+│   │   ├── Grid
+│   │   └── nav
+│   ├── constants
+│   │   └── index.ts
 │   ├── hooks
 │   │   ├── useGetPokemonSingleVsDualTypes.tsx
 │   │   └── useGetPokemonTypes.tsx
@@ -117,26 +124,19 @@ npm run build
 │   │   │   ├── SearchResults
 │   │   │   ├── sectionHeading
 │   │   │   ├── heading.tsx
-│   │   │   └── index.ts
+│   │   │   └── index.tsx
 │   │   └── NotFound
 │   ├── stateManager
 │   │   ├── General.tsx
 │   │   ├── Pokemon.tsx
 │   │   ├── Theme.tsx
 │   │   └── variable.tsx
-│   ├── components
-│   │   ├── Buttons
-│   │   ├── Feedback
-│   │   ├── Footer
-│   │   ├── General
-│   │   ├── Grid
-│   │   └── nav
-│   ├── App.tsx
-│   ├── App.css
-│   ├── main.tsx
 │   ├── utils
 │   │   └── helpers.ts
-│   └── styles.css
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
 ├── package.json
 └── README.md
 ```
