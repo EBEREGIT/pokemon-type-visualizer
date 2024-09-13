@@ -150,29 +150,29 @@ npm run build
 I used the PokéAPI to fetch the first 151 Pokémon. Since each Pokémon’s types are in their individual detail objects, multiple API requests were required. I handled this efficiently using `Promise.all` to fetch the details for all Pokémon in parallel.
 
 ```javascript
+  // ./src/stateManager/Pokemon.tsx
   const getPokemons = async () => {
     setIsLoading(true);
 
     try {
-      // get all pokemons
       const response = await axios.get(`${BaseUrl}?limit=151`);
-
-      // get details for each pokemon
-      const output = await Promise.all(
-        response?.data?.results?.map((element: BasicPokemon) => {
-          return axios.get(element?.url);
-        })
+      const pokemonUrls = response?.data?.results?.map(
+        (pokemon: BasicPokemon) => pokemon.url
       );
 
-      // setup pokemons
-      for (const pokemon of output) {
-        setPokemons((previousState) => [...previousState, pokemon.data]);
-      }
+      const pokemonDetails = await Promise.all(
+        pokemonUrls.map((url: string) => axios.get(url))
+      );
+
+      const allPokemonData = pokemonDetails.map((pokemon) => pokemon.data);
+
+      setPokemons(allPokemonData);
 
       setIsSuccessful(true);
-    } catch (error: unknown) {
+
+    } catch (error: any) {
       setIsError(true);
-      throw new Error(error as string);
+      setFeedback(`Error fetching Pokémon data:, ${error?.message as string}`);
     } finally {
       reset();
     }
@@ -184,6 +184,7 @@ I used the PokéAPI to fetch the first 151 Pokémon. Since each Pokémon’s typ
 The Pokémon data was transformed to count how many Pokémon belonged to each type. If a Pokémon had multiple types, I incremented the count for each type. This logic was put in a hook to keep the code modular. The hook also called other utility functions defined in the `helpers.ts` file to help separate concerns.
 
 ```javascript
+// ./src/hooks/useGetPokemonTypes.tsx
 import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
 import {
@@ -191,22 +192,27 @@ import {
   setupPokemonTypes,
   sortPokemonObject,
 } from "../utils/helpers";
+import { SortedPokemon } from "../assets/types";
 
-export default function useGetSortedPokemonTypes() {
+const useGetSortedPokemonTypes = (): SortedPokemon[] => {
   const { pokemons } = useContext(Variable);
 
-  const pokemonMap: Record<string, number> = getPokemonTypesCount(pokemons);
-
-  const pokemonMapEntries: Array<[string, number]> =
-    sortPokemonObject(pokemonMap);
-
-  const sortedPokemonTypes = useMemo(
-    () => setupPokemonTypes(pokemonMapEntries),
-    [pokemonMapEntries]
+  const pokemonMap: Record<string, number> = useMemo(
+    () => getPokemonTypesCount(pokemons),
+    [pokemons]
   );
 
+  const sortedPokemonTypes: SortedPokemon[] = useMemo(() => {
+    const pokemonMapEntries: Array<[string, number]> =
+      sortPokemonObject(pokemonMap);
+    return setupPokemonTypes(pokemonMapEntries);
+  }, [pokemonMap]);
+
   return sortedPokemonTypes;
-}
+};
+
+export default useGetSortedPokemonTypes;
+
 ```
 
 ### Charting
@@ -214,6 +220,7 @@ export default function useGetSortedPokemonTypes() {
 I used **Recharts** to create the bar chart. The chart data was sorted in descending order of Pokémon count. The chart also supports a toggle to switch between displaying raw counts and percentages. It was designed for reusability.
 
 ```javascript
+// ./src/pages/home/Reports/chart/BarChart.tsx
 import {
   Bar,
   BarChart,
@@ -243,7 +250,6 @@ export default function BarChartComponent(props: {
     <Layout
       content={
         <>
-          {/* chart title */}
           <Heading
             label={label}
             typographyStyles={{ fontWeight: 500 }}
@@ -251,7 +257,6 @@ export default function BarChartComponent(props: {
             styles={{ mb: 2 }}
           />
 
-          {/* chart body */}
           <ResponsiveContainer width={"100%"} height={400}>
             <BarChart data={data}>
               <XAxis dataKey="name" />
@@ -259,7 +264,6 @@ export default function BarChartComponent(props: {
               <Tooltip />
               <Legend />
 
-              {/* display each bar cel with its unique color */}
               <Bar dataKey={showPercentage ? "percentage" : "count"}>
                 {data.map((entry) => (
                   <Cell
@@ -288,19 +292,23 @@ export default function BarChartComponent(props: {
 CSS and **Material UI (MUI)** were used to style the app, ensuring a visually appealing and responsive layout. Unique colors were also auto generated and assigned to each Pokémon type to make the chart more engaging.
 
 ```javascript
-export const generateRandomColors = (num: number) => {
-  const colors: string[] = [];
+// ./src/utils/helpers.ts
+export const generateRandomColors = (num: number): string[] => {
+  if (num <= 0) return [];
 
-  // loop until colors are equal to the num
-  while (colors.length < num) {
-    const newColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  const colors: Set<string> = new Set<string>();
 
-    if (!colors.includes(newColor)) {
-      colors.push(newColor);
-    }
+  while (colors.size < num) {
+    const newColor: string =
+      "#" +
+      Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, "0");
+
+    colors.add(newColor);
   }
 
-  return [...new Set(colors)];
+  return Array.from(colors);
 };
 ```
 
@@ -318,6 +326,7 @@ export const generateRandomColors = (num: number) => {
 - **Single-type vs Dual-type Chart**: I implemented a second chart showing the distribution of single-type and dual-type Pokémon. Here is the data transformation hook:
 
 ```javascript
+// ./src/hooks/useGetPokemonSingleVsDualTypes.tsx
 import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
 import {
@@ -325,23 +334,26 @@ import {
   setupPokemonTypes,
   sortPokemonObject,
 } from "../utils/helpers";
+import { SortedPokemon } from "../assets/types";
 
-export default function useGetPokemonSingleVsDualTypes() {
+const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
   const { pokemons } = useContext(Variable);
 
-  const pokemonMap: Record<string, number> =
-    getPokemonSingleVsDualTypesCount(pokemons);
-
-  const pokemonMapEntries: Array<[string, number]> =
-    sortPokemonObject(pokemonMap);
-
-  const sortedPokemonSingleVsDualTypes = useMemo(
-    () => setupPokemonTypes(pokemonMapEntries),
-    [pokemonMapEntries]
+  const pokemonMap: Record<string, number> = useMemo(
+    () => getPokemonSingleVsDualTypesCount(pokemons),
+    [pokemons]
   );
 
+  const sortedPokemonSingleVsDualTypes: SortedPokemon[] = useMemo(() => {
+    const pokemonMapEntries: Array<[string, number]> =
+      sortPokemonObject(pokemonMap);
+    return setupPokemonTypes(pokemonMapEntries);
+  }, [pokemonMap]);
+
   return sortedPokemonSingleVsDualTypes;
-}
+};
+
+export default useGetPokemonSingleVsDualTypes;
 ```
 
 The code above calls other utility functions in the `helpers.ts` file.
@@ -349,35 +361,51 @@ The code above calls other utility functions in the `helpers.ts` file.
 - **Search Functionality**: i added a search bar that allows users to filter Pokémon by name. The following code is the search algorithm:
 
 ```javascript
-const searchItems = () => {
-  if (!search) return setSearchResult([]);
+  // ./src/stateManager/General.tsx
+  const searchItems = () => {
+    if (!search.trim()) {
+      setSearchResult([]);
+      return;
+    }
 
-  if (!pokemons?.length) {
-    setSearch("");
-    return alert("No items to search");
-  }
+    if (!pokemons?.length) {
+      setSearch("");
+      setFeedback("No Pokémon available to search.");
+      setIsError(true);
+      reset()
+    }
 
-  setSearchResult([]);
+    const normalizedSearch = search.toLowerCase().replace(/\s+/g, "");
 
-  const results = pokemons.filter((pokemon) =>
-    pokemon.name
-      .toLowerCase()
-      .replace(/\s+/g, "")
-      .includes(search.toLowerCase().replace(/\s+/g, ""))
-  );
+    const results = pokemons.filter(({ name }) =>
+      name.toLowerCase().replace(/\s+/g, "").includes(normalizedSearch)
+    );
 
-  setSearchResult(results);
-};
+    if (results.length) {
+      setSearchResult(results);
+    } else {
+      setSearchResult([]);
+    }
+
+    window.scrollTo({
+      top: 10,
+      behavior: "smooth",
+    });
+  };
 ```
 
 ---
 
 ## Challenges Faced
 
-- **API Rate Limits**: The PokéAPI has rate limits and I needed to retrieve data for 151 pokemons. To solve this problem, I optimized API calls using `Promise.all` and handled possible errors gracefully. This saved time of execution and avoided possible timeout.
-- **Data Transformation**: Handling Pokémon with multiple types while ensuring accurate counting for each type was a challenge but I overcame it using data structures.
-- **Design Challenges**: Coming up with the right design, font, and color was another challenge. To solve this, I sketch out wireframes or mockups using tools like Figma and sketch pad before diving into implementation. It helped clarify my vision and identify potential issues early. I also reviewed existing design systems and UI kits to provide inspiration and guidance.
+- **API Rate Limits**: The PokéAPI has rate limits and I needed to retrieve data for 151 pokemons. To solve this problem, I optimized API calls using `Promise.all` and handled possible errors properly. This saved time of execution and avoided possible timeout.
+
+- **Data Transformation**: Handling Pokémon with multiple types while ensuring accurate counting for each type was a challenge but I overcame it using befitting data structures and algorithm.
+
+- **Design Challenges**: Coming up with the right design, font, and color was another challenge. To solve this, I sketch out wireframes or mockups using tools like Figma and a sketch pad before diving into implementation. It helped clarify my vision and identify potential issues early. I also reviewed existing design systems and UI kits to provide inspiration and guidance.
+
 - **Deprecation of MUI Components**: Since it was the first time using MUI v6, I noticed that some component has been deprecated or will soon be. So I checked the MUI migration guide and documentation for updates and recommended replacements. I also checked community forums and GitHub issues related to what I was facing.
+
 - **Recharts X-axis and Y-axis Issues**: The chart component was throwing error in the console relating to the both axis. So I consulted the library’s documentation and examples. Finally, I checked community forums and GitHub issues related to what I was facing.
 
 ---
@@ -385,8 +413,10 @@ const searchItems = () => {
 ## Future Improvements
 
 - Implement unit tests for the data transformation logic using **Jest**.
-- Add animations to the chart for a more dynamic user experience.
+- Add and enhance animations across the application for a more dynamic user experience.
 - Improve accessibility by adding ARIA labels and screen reader support.
+- Possible Typing improvements or addition
+- Upgrade design and algorithms
 
 ---
 

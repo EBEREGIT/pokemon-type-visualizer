@@ -25,6 +25,7 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
     setIsError,
     setIsSuccessful,
     pokemons,
+    setFeedback,
   } = useContext(Variable);
 
   // reset
@@ -33,30 +34,43 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
       setIsLoading(false);
       setIsError(false);
       setIsSuccessful(false);
+      setFeedback("");
     }, 1000);
   };
 
   // search Items
   const searchItems = () => {
-    if (!search) return setSearchResult([]);
-
-    if (!pokemons?.length) {
-      setSearch("");
-      return alert("No items to search");
+    // Clear results if search term is empty
+    if (!search.trim()) {
+      setSearchResult([]);
+      return;
     }
 
-    setSearchResult([]);
+    // Clear search term if Pokémon list is empty
+    if (!pokemons?.length) {
+      setSearch("");
+      setFeedback("No Pokémon available to search.");
+      setIsError(true);
+      reset()
+    }
 
-    const results = pokemons.filter((pokemon) =>
-      pokemon.name
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .includes(search.toLowerCase().replace(/\s+/g, ""))
+    // Prepare search term for filtering
+    const normalizedSearch = search.toLowerCase().replace(/\s+/g, "");
+
+    // Filter Pokémon based on search term
+    const results = pokemons.filter(({ name }) =>
+      name.toLowerCase().replace(/\s+/g, "").includes(normalizedSearch)
     );
 
-    setSearchResult(results);
+    // Update search results if necessary
+    if (results.length) {
+      setSearchResult(results);
+    } else {
+      // If no results, clear the search result array
+      setSearchResult([]);
+    }
 
-    // scroll to top to see search results
+    // Scroll to top to display search results
     window.scrollTo({
       top: 10,
       behavior: "smooth",
