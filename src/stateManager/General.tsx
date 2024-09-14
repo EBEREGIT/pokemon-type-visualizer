@@ -35,7 +35,7 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
       setIsError(false);
       setIsSuccessful(false);
       setFeedback("");
-    }, 1000);
+    }, 500);
   };
 
   // search Items
