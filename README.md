@@ -6,8 +6,8 @@ The **Pokémon Type Distribution Visualizer** is a React application that fetche
 
 ## Demo
 
-- [Netlify](https://pokemon-types-chart.netlify.app/)
-- [Cloudflare](https://pokemon-type-chart.pages.dev/)
+- [Netlify Link](https://pokemon-types-chart.netlify.app/)
+- [Cloudflare Link](https://pokemon-type-chart.pages.dev/)
 
 ---
 
@@ -108,11 +108,28 @@ npm run build
 │   │   └── types.ts
 │   ├── components
 │   │   ├── Buttons
+│   │   │   └── IconBtn.tsx
 │   │   ├── Feedback
+│   │   │   ├── Loader.tsx
+│   │   │   └── toast.tsx
 │   │   ├── Footer
+│   │   │   ├── index.tsx
+│   │   │   └── RepoRedirect.tsx
 │   │   ├── General
+│   │   │   ├── Animate.tsx
+│   │   │   ├── Layout.tsx
+│   │   │   ├── ModeToggle.tsx
+│   │   │   └── Navigation.tsx
 │   │   ├── Grid
+│   │   │   ├── full.tsx
+│   │   │   └── Half.tsx
 │   │   └── nav
+│   │   │   ├── search.tsx
+│   │   │   │   ├── MobileSearchInput.tsx
+│   │   │   │   ├── searchButton.tsx
+│   │   │   │   └── searchInput.tsx
+│   │   │   ├── index.tsx
+│   │   │   └── Logo.tsx
 │   ├── constants
 │   │   └── index.ts
 │   ├── hooks
@@ -121,8 +138,28 @@ npm run build
 │   ├── pages
 │   │   ├── home
 │   │   │   ├── Reports
+│   │   │   │   ├── chart
+│   │   │   │   │   ├── BarChart
+│   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   ├── title.tsx
+│   │   │   │   │   │   └── visualizer.tsx
+│   │   │   │   │   └── PieChart
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── PokemonTypes.tsx
+│   │   │   │   └── SingleVsDoubleTypes.tsx
 │   │   │   ├── SearchResults
+│   │   │   │   ├── pokemon
+│   │   │   │   │   ├── Cry.tsx
+│   │   │   │   │   ├── heading.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── item.tsx
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── Pokemons.tsx
 │   │   │   ├── sectionHeading
+│   │   │   │   ├── countsAndPercentagesToggle.tsx
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── label.tsx
+│   │   │   │   └── title.tsx
 │   │   │   ├── heading.tsx
 │   │   │   └── index.tsx
 │   │   └── NotFound
@@ -384,11 +421,11 @@ The code above calls other utility functions in the `helpers.ts` file.
 
 ## Future Improvements
 
-- Implement unit tests for the data transformation logic using **Jest**.
+- Implement unit tests for the data transformation logic using **Jest**, **Jasmine** or other testing library.
 - Add and enhance animations across the application for a more dynamic user experience.
 - Improve accessibility by adding ARIA labels and screen reader support.
-- Possible Typing improvements or addition
-- Upgrade design and algorithms
+- Possible Typing improvements or addition.
+- Upgrade design and algorithms.
 
 ---
 
