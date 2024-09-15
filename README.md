@@ -47,7 +47,7 @@ The **Pokémon Type Distribution Visualizer** is a React application that fetche
 
 - **[React.js](https://react.dev/)**: JavaScript library for building user interfaces.
 - **[Recharts](https://recharts.org/en-US/)**: Charting library for data visualization.
-- **CSS / [Material UI (MUI)](https://mui.com/)**: For styling the UI and ensuring responsiveness.
+- **[Material UI (MUI)](https://mui.com/)**: For styling the UI and ensuring responsiveness.
 - **[PokéAPI](https://pokeapi.co/)**: The source of Pokémon data.
 - **[TypeScript](https://www.typescriptlang.org/)**: For typechecking, application logic and data transformation.
 - **[Axios](https://axios-http.com/docs/intro)**: To make API call.
