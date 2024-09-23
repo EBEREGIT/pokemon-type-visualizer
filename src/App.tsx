@@ -7,8 +7,6 @@ import "./App.css";
 // internal import
 import { ThemeManager } from "./stateManager/Theme";
 import { Paper, ThemeProvider } from "@mui/material";
-import Loader from "./components/Feedback/Loader";
-import Toast from "./components/Feedback/toast";
 import Nav from "./components/nav";
 import Home from "./pages/home";
 import Footer from "./components/Footer";
@@ -18,9 +16,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Loader />
-      <Toast />
-
       {/* Background with a fixed height to take up the view port  */}
       <Paper
         square

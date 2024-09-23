@@ -1,15 +1,16 @@
-import { useContext, useMemo } from "react";
-import { Variable } from "../stateManager/variable";
+import { useMemo } from "react";
 import { getPokemonSingleVsDualTypesCount } from "../utils/helpers";
-import { SortedPokemon } from "../assets/types";
+import { BasicPokemonDetails, SortedPokemon } from "../assets/types";
 import useSort from "./useSort";
+import useGetPokemonsDetails from "./useGetPokemonsDetails";
 
 const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
-  const { pokemons } = useContext(Variable);
+  const pokemons = useGetPokemonsDetails();
 
   // Memoize pokemonMap based on pokemons to avoid unnecessary recalculations
   const pokemonMap: Record<string, number> = useMemo(
-    () => getPokemonSingleVsDualTypesCount(pokemons),
+    () =>
+      getPokemonSingleVsDualTypesCount(pokemons.data as BasicPokemonDetails[]),
     [pokemons]
   );
 

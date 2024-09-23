@@ -31,7 +31,7 @@ export const generateRandomColors = (num: number): string[] => {
 export const getPokemonTypesCount = (
   pokemons: BasicPokemonDetails[]
 ): Record<string, number> => {
-  if (!pokemons.length) return {};
+  if (!pokemons || !pokemons.length) return {};
 
   const pokemonMap: Record<string, number> = {};
 
@@ -83,7 +83,7 @@ export const sortPokemonObject = (
 export const getPokemonSingleVsDualTypesCount = (
   pokemons: BasicPokemonDetails[]
 ): Record<string, number> => {
-  if (!pokemons.length) return {};
+  if (!pokemons || !pokemons.length) return {};
 
   const pokemonMap: Record<string, number> = {
     dual: 0,

@@ -11,7 +11,7 @@ export default function Home() {
   const { search } = useContext(Variable);
   const { getPokemons } = useContext(Pokemon);
   const { isLessThanMD } = useContext(ThemeManager);
-
+  
   useEffect(() => {
     if (location.hostname === "localhost") {
       // this runs only on development to avoid duplicate data
