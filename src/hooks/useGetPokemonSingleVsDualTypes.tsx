@@ -1,11 +1,8 @@
 import { useContext, useMemo } from "react";
 import { Variable } from "../stateManager/variable";
-import {
-  getPokemonSingleVsDualTypesCount,
-  setupPokemonTypes,
-  sortPokemonObject,
-} from "../utils/helpers";
+import { getPokemonSingleVsDualTypesCount } from "../utils/helpers";
 import { SortedPokemon } from "../assets/types";
+import useSort from "./useSort";
 
 const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
   const { pokemons } = useContext(Variable);
@@ -16,14 +13,8 @@ const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
     [pokemons]
   );
 
-  // Memoize the sorted Pokémon types
-  const sortedPokemonSingleVsDualTypes: SortedPokemon[] = useMemo(() => {
-    const pokemonMapEntries: Array<[string, number]> =
-      sortPokemonObject(pokemonMap);
-    return setupPokemonTypes(pokemonMapEntries);
-  }, [pokemonMap]);
-
-  return sortedPokemonSingleVsDualTypes;
+  // return the sorted data
+  return useSort({ pokemonMap });
 };
 
 export default useGetPokemonSingleVsDualTypes;
