@@ -1,11 +1,11 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { useContext } from "react";
 import { SearchTwoTone } from "@mui/icons-material";
-import { Variable } from "../../../stateManager/variable";
 import { ThemeManager } from "../../../stateManager/Theme";
+import { General } from "../../../stateManager/General";
 
 export default function SearchInput() {
-  const { search, setSearch } = useContext(Variable);
+  const { search, setSearch } = useContext(General);
   const { isLessThanMD } = useContext(ThemeManager);
 
   return (

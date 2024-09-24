@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
 import Reports from "./Reports";
 import SearchResult from "./SearchResults";
-import { Variable } from "../../stateManager/variable";
 import { useContext } from "react";
 import SectionHeading from "./sectionHeading";
 import { ThemeManager } from "../../stateManager/Theme";
+import { General } from "../../stateManager/General";
 
 export default function Home() {
-  const { search } = useContext(Variable);
+  const { search } = useContext(General);
   const { isLessThanMD } = useContext(ThemeManager);
 
   return (

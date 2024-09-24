@@ -1,10 +1,10 @@
 import { Stack, Switch } from "@mui/material";
 import { useContext } from "react";
-import { Variable } from "../../../stateManager/variable";
 import LabelComponent from "./label";
+import { General } from "../../../stateManager/General";
 
 export default function CountsAndPercentagesToggle() {
-  const { setShowPercentage, showPercentage } = useContext(Variable);
+  const { setShowPercentage, showPercentage } = useContext(General);
 
   return (
     <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>

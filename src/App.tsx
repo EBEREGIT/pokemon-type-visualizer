@@ -10,9 +10,13 @@ import { Paper, ThemeProvider } from "@mui/material";
 import Nav from "./components/nav";
 import Home from "./pages/home";
 import Footer from "./components/Footer";
+import Loader from "./components/Feedback/Loader";
+import useGetPokemonsDetails from "./hooks/useGetPokemonsDetails";
+import Toast from "./components/Feedback/toast";
 
 function App() {
   const { theme, mode, isLessThanMD } = useContext(ThemeManager);
+  const data = useGetPokemonsDetails();
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,6 +40,8 @@ function App() {
             backgroundColor: mode ? "" : theme.gray.main,
           }}
         >
+          <Loader loading={data.isLoading} />
+          <Toast data={data} />
           <Nav />
           <Home />
           <Footer />

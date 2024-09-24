@@ -2,10 +2,10 @@
 import { useContext } from "react";
 import { SearchTwoTone } from "@mui/icons-material";
 import IconBtn from "../../Buttons/IconBtn";
-import { Variable } from "../../../stateManager/variable";
+import { General } from "../../../stateManager/General";
 
 export default function SearchButton() {
-  const { show, setShow } = useContext(Variable);
+  const { show, setShow } = useContext(General);
 
   return (
     <IconBtn handleClick={() => setShow(!show)} label={<SearchTwoTone />} />
