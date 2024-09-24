@@ -16,12 +16,6 @@ type VariableType = {
   setSearch: Dispatch<SetStateAction<string>>;
 
   // boolean
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  isError: boolean;
-  setIsError: Dispatch<SetStateAction<boolean>>;
-  isSuccessful: boolean;
-  setIsSuccessful: Dispatch<SetStateAction<boolean>>;
   showPercentage: boolean;
   setShowPercentage: Dispatch<SetStateAction<boolean>>;
   show: boolean;
@@ -30,12 +24,6 @@ type VariableType = {
   // array
   searchResult: BasicPokemonDetails[];
   setSearchResult: Dispatch<SetStateAction<BasicPokemonDetails[]>>;
-
-  // pokemon
-  pokemon: BasicPokemonDetails | null;
-  setPokemon: Dispatch<SetStateAction<BasicPokemonDetails | null>>;
-  pokemons: BasicPokemonDetails[];
-  setPokemons: Dispatch<SetStateAction<BasicPokemonDetails[]>>;
 };
 
 type VariableProviderProps = {
@@ -50,18 +38,11 @@ export default function VariableProvider({ children }: VariableProviderProps) {
   const [search, setSearch] = useState<string>("");
 
   // boolean
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
   const [showPercentage, setShowPercentage] = useState(false);
   const [show, setShow] = useState(false);
 
   // array
   const [searchResult, setSearchResult] = useState<BasicPokemonDetails[]>([]);
-
-  // pokemon
-  const [pokemon, setPokemon] = useState<BasicPokemonDetails | null>(null);
-  const [pokemons, setPokemons] = useState<BasicPokemonDetails[]>([]);
 
   return (
     <Variable.Provider
@@ -72,18 +53,8 @@ export default function VariableProvider({ children }: VariableProviderProps) {
         setSearch,
         feedback,
         setFeedback,
-        isLoading,
-        setIsLoading,
-        isError,
-        setIsError,
-        isSuccessful,
-        setIsSuccessful,
         showPercentage,
         setShowPercentage,
-        pokemon,
-        setPokemon,
-        pokemons,
-        setPokemons,
         show,
         setShow,
       }}

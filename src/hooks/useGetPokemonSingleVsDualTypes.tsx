@@ -6,12 +6,12 @@ import useGetPokemonsDetails from "./useGetPokemonsDetails";
 
 const useGetPokemonSingleVsDualTypes = (): SortedPokemon[] => {
   const pokemons = useGetPokemonsDetails();
+  const pokemonsDetails = pokemons.data as BasicPokemonDetails[];
 
   // Memoize pokemonMap based on pokemons to avoid unnecessary recalculations
   const pokemonMap: Record<string, number> = useMemo(
-    () =>
-      getPokemonSingleVsDualTypesCount(pokemons.data as BasicPokemonDetails[]),
-    [pokemons]
+    () => getPokemonSingleVsDualTypesCount(pokemonsDetails),
+    [pokemonsDetails]
   );
 
   // return the sorted data

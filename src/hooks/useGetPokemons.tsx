@@ -1,16 +1,20 @@
 import axios from "axios";
 import { BaseUrl } from "../constants";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useGetPokemonsData } from "../assets/types";
 
 export default function useGetPokemons() {
-  const fetchPokemons = async () => {
+  const getPokemons = async (): Promise<useGetPokemonsData> => {
     const response = await axios.get(`${BaseUrl}?limit=151`);
     return response.data;
   };
 
-  const output = useQuery({
+  const output: UseQueryResult<useGetPokemonsData, Error> = useQuery<
+    useGetPokemonsData,
+    Error
+  >({
     queryKey: ["pokemons"],
-    queryFn: () => fetchPokemons(),
+    queryFn: () => getPokemons(),
   });
 
   return output;
