@@ -141,15 +141,3 @@ export const getPercentage = (amount: number, total: number): number => {
 export const getTotal = (arr: Array<[string, number]>): number => {
   return arr.reduce((total, [, num]) => total + num, 0);
 };
-
-export const debounce = (func: () => void, delay: number) => {
-  let timeoutId: string | number | NodeJS.Timeout | undefined;
-
-  return () => {
-    clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      func();
-    }, delay);
-  };
-};
