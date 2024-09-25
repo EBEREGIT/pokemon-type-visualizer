@@ -1,13 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external imports
-import React, { createContext, useContext } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
 // internal imports
-import { Variable } from "./variable";
+import { BasicPokemonDetails } from "../assets/types";
+import useGetPokemonsDetails from "../hooks/useGetPokemonsDetails";
+import { UseQueryResult } from "@tanstack/react-query";
 
 type GeneralType = {
-  reset: () => void;
   searchItems: () => void;
+
+  // string
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+
+  // boolean
+  showPercentage: boolean;
+  setShowPercentage: Dispatch<SetStateAction<boolean>>;
+  show: boolean;
+  setShow: Dispatch<SetStateAction<boolean>>;
+
+  // array
+  searchResult: BasicPokemonDetails[];
+  setSearchResult: Dispatch<SetStateAction<BasicPokemonDetails[]>>;
 };
 
 type GeneralProviderProps = {
@@ -17,26 +37,19 @@ type GeneralProviderProps = {
 export const General = createContext({} as GeneralType);
 
 export default function GeneralProvider({ children }: GeneralProviderProps) {
-  const {
-    setSearchResult,
-    search,
-    setSearch,
-    setIsLoading,
-    setIsError,
-    setIsSuccessful,
-    pokemons,
-    setFeedback,
-  } = useContext(Variable);
+  // string
+  const [search, setSearch] = useState<string>("");
 
-  // reset
-  const reset = () => {
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsError(false);
-      setIsSuccessful(false);
-      setFeedback("");
-    }, 500);
-  };
+  // boolean
+  const [showPercentage, setShowPercentage] = useState(false);
+  const [show, setShow] = useState(false);
+
+  // array
+  const [searchResult, setSearchResult] = useState<BasicPokemonDetails[]>([]);
+
+  const pokemons: UseQueryResult<BasicPokemonDetails[], Error> =
+    useGetPokemonsDetails();
+  const pokemonsDetails = pokemons.data as BasicPokemonDetails[];
 
   // search Items
   const searchItems = () => {
@@ -47,28 +60,21 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
     }
 
     // Clear search term if Pokémon list is empty
-    if (!pokemons?.length) {
+    if (!pokemonsDetails?.length) {
       setSearch("");
-      setFeedback("No Pokémon available to search.");
-      setIsError(true);
-      reset()
+      return;
     }
 
     // Prepare search term for filtering
     const normalizedSearch = search.toLowerCase().replace(/\s+/g, "");
 
     // Filter Pokémon based on search term
-    const results = pokemons.filter(({ name }) =>
+    const results = pokemonsDetails.filter(({ name }) =>
       name.toLowerCase().replace(/\s+/g, "").includes(normalizedSearch)
     );
 
     // Update search results if necessary
-    if (results.length) {
-      setSearchResult(results);
-    } else {
-      // If no results, clear the search result array
-      setSearchResult([]);
-    }
+    setSearchResult(results);
 
     // Scroll to top to display search results
     window.scrollTo({
@@ -81,7 +87,14 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
     <General.Provider
       value={{
         searchItems,
-        reset,
+        searchResult,
+        setSearchResult,
+        search,
+        setSearch,
+        showPercentage,
+        setShowPercentage,
+        show,
+        setShow,
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { Variable } from "../../stateManager/variable";
+import { UseQueryResult } from "@tanstack/react-query";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -11,11 +11,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Toast() {
-  const { isLoading, isSuccessful, isError, feedback } = React.useContext(Variable);
+export default function Toast(props: { data: UseQueryResult<unknown, Error> }) {
+  const { isSuccess, isLoading, isError } = props.data;
 
   // Determine the severity and message for the alert
-  const severity = isSuccessful
+  const severity = isSuccess
     ? "success"
     : isError
     ? "error"
@@ -25,20 +25,21 @@ export default function Toast() {
 
   const message = isLoading
     ? "Working... Please Wait 🙏🏾"
-    : isSuccessful
+    : isSuccess
     ? "Successful 😊"
     : isError
-    ? feedback
+    ? "An Error Occurred"
     : "";
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       <Snackbar
-        open={Boolean(isLoading || isSuccessful || isError || feedback)}
-        autoHideDuration={5000}
+        open={Boolean(isLoading || isSuccess || isError)}
+        autoHideDuration={1000}
+        onClose={() => {}}
       >
-        <Alert severity={severity} sx={{ width: "100%" }}>
-          {message}
+        <Alert severity={severity} sx={{ width: "100%" }} onClose={() => {}}>
+          {message as React.ReactNode}
         </Alert>
       </Snackbar>
     </Stack>

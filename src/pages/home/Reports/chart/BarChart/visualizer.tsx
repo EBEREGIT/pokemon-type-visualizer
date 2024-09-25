@@ -10,11 +10,11 @@ import {
 } from "recharts";
 import { SortedPokemon } from "../../../../../assets/types";
 import { useContext } from "react";
-import { Variable } from "../../../../../stateManager/variable";
 import { ThemeManager } from "../../../../../stateManager/Theme";
+import { General } from "../../../../../stateManager/General";
 
 export default function Visualizer({ data }: { data: SortedPokemon[] }) {
-  const { showPercentage } = useContext(Variable);
+  const { showPercentage } = useContext(General);
   const { theme, mode } = useContext(ThemeManager);
 
   return (

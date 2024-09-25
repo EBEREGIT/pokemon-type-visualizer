@@ -4,12 +4,12 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { BasicPokemonDetails } from "../../../assets/types";
-import { Variable } from "../../../stateManager/variable";
 import Pokemon from "./pokemon";
 import { capitalize } from "../../../utils/helpers";
+import { General } from "../../../stateManager/General";
 
 export default function Pokemons() {
-  const { searchResult } = React.useContext(Variable);
+  const { searchResult } = React.useContext(General);
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange =

@@ -81,3 +81,10 @@ export type SortedPokemon = {
   color: string;
   percentage: number;
 };
+
+export type useGetPokemonsData = {
+  count: number;
+  next: string;
+  previous: null;
+  results: BasicPokemon[];
+};

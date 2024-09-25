@@ -31,7 +31,7 @@ export const generateRandomColors = (num: number): string[] => {
 export const getPokemonTypesCount = (
   pokemons: BasicPokemonDetails[]
 ): Record<string, number> => {
-  if (!pokemons.length) return {};
+  if (!pokemons || !pokemons.length) return {};
 
   const pokemonMap: Record<string, number> = {};
 
@@ -83,7 +83,7 @@ export const sortPokemonObject = (
 export const getPokemonSingleVsDualTypesCount = (
   pokemons: BasicPokemonDetails[]
 ): Record<string, number> => {
-  if (!pokemons.length) return {};
+  if (!pokemons || !pokemons.length) return {};
 
   const pokemonMap: Record<string, number> = {
     dual: 0,
@@ -140,4 +140,16 @@ export const getPercentage = (amount: number, total: number): number => {
 // calculate total of the group of types
 export const getTotal = (arr: Array<[string, number]>): number => {
   return arr.reduce((total, [, num]) => total + num, 0);
+};
+
+export const debounce = (func: () => void, delay: number) => {
+  let timeoutId: string | number | NodeJS.Timeout | undefined;
+
+  return () => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func();
+    }, delay);
+  };
 };

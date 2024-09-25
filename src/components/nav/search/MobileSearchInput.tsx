@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { ThemeManager } from "../../../stateManager/Theme";
-import { Variable } from "../../../stateManager/variable";
 import SearchInput from "./searchInput";
 import { Box } from "@mui/material";
 import Animate from "../../General/Animate";
+import { General } from "../../../stateManager/General";
 
 export default function MobileSearchInput() {
   const { isLessThanMD } = useContext(ThemeManager);
-  const { show } = useContext(Variable);
+  const { show } = useContext(General);
 
   return (
     <>
