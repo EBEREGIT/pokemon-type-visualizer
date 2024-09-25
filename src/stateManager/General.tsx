@@ -54,7 +54,7 @@ export default function GeneralProvider({ children }: GeneralProviderProps) {
   // search Items
   const searchItems = () => {
     // Clear results if search term is empty
-    if (!search.trim()) {
+    if (!search.trim() || search.length < 3) {
       setSearchResult([]);
       return;
     }
