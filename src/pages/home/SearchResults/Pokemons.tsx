@@ -41,7 +41,7 @@ export default function Pokemons() {
               </AccordionDetails>
             </Accordion>
           ))
-        : "No Pokemon Found!"}
+        : "Type 3 characters at least - No Pokemon Found!"}
     </>
   );
 }
